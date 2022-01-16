@@ -1,0 +1,29 @@
+doctype
+html
+	head
+		meta(charset='utf-8')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge')
+
+		title Mealplanning suggestions
+
+		meta(name='description', content='')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+
+		script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js')
+
+		style
+			include suggest.css
+	body
+		header
+			h1 Meal planning suggestions
+		
+		div(id="content-pane")
+
+		footer
+			button(onclick="suggest()") Eww, gross! Find something else
+
+			// Throw in the builddate for reference:
+			br
+			span#builddate Build date: #{ new Date().toDateString() }
+		script
+			include suggest.js

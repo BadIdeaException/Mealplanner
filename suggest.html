@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mealplanning suggestions</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>body {
+	font-weight: lighter;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+#content-pane {
+	background-color: #FAFAFA;
+	padding: 16px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+/* Float four columns side by side */
+.column {
+	float: left;
+	width: 25%;
+	padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding in columns */
+.row {margin: 10px -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+/* Style the counter cards */
+.card {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+	padding: 16px;
+	text-align: center;
+	background-color: white;
+}
+
+.active {
+	background-color: lemonchiffon;
+}
+
+/* This is a helper class that makes the background color change that marks
+   the chosen card fade in and out more smoothly */
+.fade {
+	transition: background-color 0.4s;
+}
+
+/* Responsive columns - two columns layout with smaller writing on small screens */
+@media screen and (max-width: 600px) {
+	.column {
+		width: 50%;
+		display: block;
+		margin-bottom: 1em;
+	}
+
+	* {
+		font-size: 90%;
+	}
+}
+
+header {
+	text-align: center;
+	font-weight: bold;
+	font-style: italic;
+	color: darkblue;
+}
+
+footer { 
+	text-align: center; 
+	padding: 16px 0;
+}
+
+button {
+	background-color: midnightblue;
+	padding: 16px 64px;
+	color: white;
+	font-style: italic;
+	font-size: 110%;
+	border-width: 1px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+#builddate {
+	font-size: 80%;
+	color:  darkgray;
+	font-style: italic;
+}
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Meal planning suggestions</h1>
+    </header>
+    <div id="content-pane"></div>
+    <footer>
+      <button onclick="suggest()">Eww, gross! Find something else</button>
+      <!-- Throw in the builddate for reference:--><br><span id="builddate">Build date: Fri Jan 14 2022</span>
+    </footer>
+    <script>const COLUMNS = 4;
+
+const CATEGORIES = [ 
+					"Horsemeat", 
+					"Vegan gluten-free hypoallergenic snowflakefood",
+					"Mud- and dirt-based foods",
+					"Nutritional Vapors",
+					"Downloadable internet foods",
+					"Non-grainy cereals",
+					"No-fun foods",
+					"Recycled stuff",
+					"Mushes and pastes",
+					"Greases, fats, and oils"
+				];
+
+
+function init() {
+	const CONTENT_PANE = $('#content-pane');
+
+	var row;
+	for (i = 0; i < CATEGORIES.length; i++) {
+		// Start a new row if appropriate
+		if (i % COLUMNS === 0) {
+			// Create a DOM element for the row with jQuery
+			row = $('<div class="row"></row>');
+			// Append the new row to the content pane
+			row.appendTo(CONTENT_PANE);
+		}
+		// Append the current category to the row
+		row.append(
+			'<div class="column"><div id="card-' + i + '" class="card fade">' + CATEGORIES[i] + '</div></div>');
+	}
+	suggest();
+}
+
+function suggest() {
+	// Deactivate the previously active card, if any
+	$('.active').removeClass('active');
+
+	// Activate a random one by number
+	$('#card-' + Math.floor(CATEGORIES.length * Math.random())).addClass('active');
+}
+
+$(document).ready(init);
+    </script>
+  </body>
+</html>
