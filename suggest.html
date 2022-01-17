@@ -44,16 +44,25 @@
 	padding: 16px;
 	text-align: center;
 	background-color: white;
+	transition: background-color 0.4s;
 }
 
 .active {
 	background-color: lemonchiffon;
 }
 
-/* This is a helper class that makes the background color change that marks
-   the chosen card fade in and out more smoothly */
-.fade {
-	transition: background-color 0.4s;
+.actions {
+	/* Need to set display: block to allow setting a height, otherwise it will;
+	   default to display: inline.;
+	   If set to inline-block, for some reason the animation will jump at the end. 
+	 */
+	display: block;
+	height: 32px;
+}
+
+.actions a {
+	margin: 0;
+	padding: 0;
 }
 
 /* Responsive columns - two columns layout with smaller writing on small screens */
@@ -106,7 +115,7 @@ button {
     <div id="content-pane"></div>
     <footer>
       <button onclick="suggest()">Eww, gross! Find something else</button>
-      <!-- Throw in the builddate for reference:--><br><span id="builddate">Build date: Fri Jan 14 2022</span>
+      <!-- Throw in the builddate for reference:--><br><span id="builddate">Build date: Mon Jan 17 2022</span>
     </footer>
     <script>const COLUMNS = 4;
 
@@ -120,7 +129,8 @@ const CATEGORIES = [
 					"No-fun foods",
 					"Recycled stuff",
 					"Mushes and pastes",
-					"Greases, fats, and oils"
+					"Greases, fats, and oils",
+					"Bread"
 				];
 
 
@@ -136,9 +146,25 @@ function init() {
 			// Append the new row to the content pane
 			row.appendTo(CONTENT_PANE);
 		}
-		// Append the current category to the row
-		row.append(
-			'<div class="column"><div id="card-' + i + '" class="card fade">' + CATEGORIES[i] + '</div></div>');
+		var column = $('<div class="column"></div>');
+		// Build the category card
+		var card = $('<div id="card-' + i + '" class="card" data-caption="' + CATEGORIES[i] + '">' + CATEGORIES[i] + '<br></div>');
+		var link = $('<a hidden href="#">Search on <img src="https://www.pinterest.com/favicon.ico"/> Pinterest</a>')
+		link.bind('click', searchPinterest);
+		$('<span class="actions"></span>')
+			.append(link)
+			.appendTo(card);
+		card
+			.bind('mouseenter', function(e) {
+				el = $(e.target).find('a')
+					.slideDown();
+			})
+			.bind('mouseleave', function(e) {
+				el = $(e.target).find('a')
+					.slideUp();
+			});
+		card.appendTo(column);
+		column.appendTo(row);
 	}
 	suggest();
 }
@@ -149,6 +175,17 @@ function suggest() {
 
 	// Activate a random one by number
 	$('#card-' + Math.floor(CATEGORIES.length * Math.random())).addClass('active');
+}
+
+function searchPinterest(e) {
+	//Reverse engineered url to search own pins on Pinterest
+	const BASE_URL = 'https://www.pinterest.com/search/my_pins/?q=';
+	
+	// Get surrounding card element
+	var el = $(e.target).closest('.card');
+	var searchterm = el.attr('data-caption') + ' recipes';
+	
+	window.open(BASE_URL + encodeURIComponent(searchterm));
 }
 
 $(document).ready(init);

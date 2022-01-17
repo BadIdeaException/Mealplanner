@@ -35,16 +35,25 @@ body {
 	padding: 16px;
 	text-align: center;
 	background-color: white;
+	transition: background-color 0.4s;
 }
 
 .active {
 	background-color: lemonchiffon;
 }
 
-/* This is a helper class that makes the background color change that marks
-   the chosen card fade in and out more smoothly */
-.fade {
-	transition: background-color 0.4s;
+.actions {
+	/* Need to set display: block to allow setting a height, otherwise it will;
+	   default to display: inline.;
+	   If set to inline-block, for some reason the animation will jump at the end. 
+	 */
+	display: block;
+	height: 32px;
+}
+
+.actions a {
+	margin: 0;
+	padding: 0;
 }
 
 /* Responsive columns - two columns layout with smaller writing on small screens */
