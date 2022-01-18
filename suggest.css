@@ -6,9 +6,15 @@ body {
 #content-pane {
 	background-color: #FAFAFA;
 	padding: 16px;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
+	display: grid;
+	/* Make the grid have as many columns as it can
+	   where a column is at least 20 times the width 
+	   of the character "0" and at most 1fr. This last
+	   part makes the columns fill the viewport width
+	   when it has extra space, but not large enough to
+	   accomodate an extra column.
+	 */
+	grid-template-columns: repeat(auto-fill, minmax(20ch,1fr));
 }
 
 /* Style the counter cards */
@@ -19,8 +25,6 @@ body {
 	text-align: center;
 	background-color: white;
 	transition: background-color 0.4s;
-	flex: 1 0 10ch; /* Shorthand for flex-grow, flex-shrink, flex-basis */
-
 }
 
 .active {

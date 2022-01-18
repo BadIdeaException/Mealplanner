@@ -17,16 +17,7 @@ const CATEGORIES = [
 function init() {
 	const CONTENT_PANE = $('#content-pane');
 
-	var row;
 	for (i = 0; i < CATEGORIES.length; i++) {
-		// Start a new row if appropriate
-		if (i % COLUMNS === 0) {
-			// Create a DOM element for the row with jQuery
-			row = $('<div class="row"></row>');
-			// Append the new row to the content pane
-			row.appendTo(CONTENT_PANE);
-		}
-		var column = $('<div class="column"></div>');
 		// Build the category card
 		var card = $('<div id="card-' + i + '" class="card" data-caption="' + CATEGORIES[i] + '">' + CATEGORIES[i] + '<br></div>');
 		var link = $('<a hidden href="#">Search on <img src="https://www.pinterest.com/favicon.ico"/> Pinterest</a>')
