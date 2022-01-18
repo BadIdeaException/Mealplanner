@@ -8,13 +8,13 @@ body {
 	padding: 16px;
 	display: grid;
 	/* Make the grid have as many columns as it can
-	   where a column is at least 20 times the width 
+	   where a column is at least 30 times the width 
 	   of the character "0" and at most 1fr. This last
 	   part makes the columns fill the viewport width
 	   when it has extra space, but not large enough to
 	   accomodate an extra column.
 	 */
-	grid-template-columns: repeat(auto-fill, minmax(20ch,1fr));
+	grid-template-columns: repeat(auto-fill, minmax(30ch,1fr));	
 }
 
 /* Style the counter cards */
@@ -24,7 +24,14 @@ body {
 	margin: 1ch;
 	text-align: center;
 	background-color: white;
-	transition: background-color 0.4s;
+	transition: background-color 0.5s;
+	/* Each card is a flexbox layed out as a column,
+	   so that we can easily put the action bar at 
+	   the bottom
+	 */
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .active {
@@ -32,12 +39,30 @@ body {
 }
 
 .actions {
-	height: 32px;
+	/* Hide overflow so the contained link will be moved out
+	   of sight rather than disappear offset to the bottom
+	 */
+	overflow: hidden;
 }
 
 .actions a {
-	margin: 0;
-	padding: 0;
+	/* Move the element relative to its normal position.
+	   This will allow us to move it out of sight to the
+	   bottom (by setting its top to 100% the height of its
+	   parent)
+	 */
+	position: relative;
+	/* Initially move the actions out of sight */
+	top: 100%;
+	/* Animate moves */
+	transition: top 0.5s;
+}
+
+.card:hover .actions a {
+	/* Move them into sight when the mouse hovers over 
+	   their card
+	 */
+	top: 0;
 }
 
 header {

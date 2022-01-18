@@ -19,24 +19,14 @@ function init() {
 
 	for (i = 0; i < CATEGORIES.length; i++) {
 		// Build the category card
-		var card = $('<div id="card-' + i + '" class="card" data-caption="' + CATEGORIES[i] + '">' + CATEGORIES[i] + '<br></div>');
-		var link = $('<a hidden href="#">Search on <img src="https://www.pinterest.com/favicon.ico"/> Pinterest</a>')
+		var card = $('<div id="card-' + i + '" class="card" data-caption="' + CATEGORIES[i] + '">' + CATEGORIES[i] + '</div>');
+
+		var link = $('<a href="#">Search on <img src="https://www.pinterest.com/favicon.ico"/> Pinterest</a>')
 		link.bind('click', searchPinterest);
 		$('<div class="actions"></div>')
 			.append(link)
 			.appendTo(card);
-		card
-			.bind('mouseenter', function(e) {
-				el = $(e.target).find('a')
-					.slideDown();
-			})
-			.bind('mouseleave', function(e) {
-				el = $(e.target).find('a')
-					.slideUp();
-			});
 		card.appendTo(CONTENT_PANE);
-		// card.appendTo(column);
-		// column.appendTo(row);
 	}
 	suggest();
 }
