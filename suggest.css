@@ -6,36 +6,21 @@ body {
 #content-pane {
 	background-color: #FAFAFA;
 	padding: 16px;
-}
-
-* {
-	box-sizing: border-box;
-}
-
-/* Float four columns side by side */
-.column {
-	float: left;
-	width: 25%;
-	padding: 0 10px;
-}
-
-/* Remove extra left and right margins, due to padding in columns */
-.row {margin: 10px -5px;}
-
-/* Clear floats after the columns */
-.row:after {
-	content: "";
-	display: table;
-	clear: both;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
 }
 
 /* Style the counter cards */
 .card {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
-	padding: 16px;
+	padding: 2ch;
+	margin: 1ch;
 	text-align: center;
 	background-color: white;
 	transition: background-color 0.4s;
+	flex: 1 0 10ch; /* Shorthand for flex-grow, flex-shrink, flex-basis */
+
 }
 
 .active {
@@ -43,30 +28,12 @@ body {
 }
 
 .actions {
-	/* Need to set display: block to allow setting a height, otherwise it will;
-	   default to display: inline.;
-	   If set to inline-block, for some reason the animation will jump at the end. 
-	 */
-	display: block;
 	height: 32px;
 }
 
 .actions a {
 	margin: 0;
 	padding: 0;
-}
-
-/* Responsive columns - two columns layout with smaller writing on small screens */
-@media screen and (max-width: 600px) {
-	.column {
-		width: 50%;
-		display: block;
-		margin-bottom: 1em;
-	}
-
-	* {
-		font-size: 90%;
-	}
 }
 
 header {

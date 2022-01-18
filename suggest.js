@@ -14,7 +14,6 @@ const CATEGORIES = [
 					"Bread"
 				];
 
-
 function init() {
 	const CONTENT_PANE = $('#content-pane');
 
@@ -32,7 +31,7 @@ function init() {
 		var card = $('<div id="card-' + i + '" class="card" data-caption="' + CATEGORIES[i] + '">' + CATEGORIES[i] + '<br></div>');
 		var link = $('<a hidden href="#">Search on <img src="https://www.pinterest.com/favicon.ico"/> Pinterest</a>')
 		link.bind('click', searchPinterest);
-		$('<span class="actions"></span>')
+		$('<div class="actions"></div>')
 			.append(link)
 			.appendTo(card);
 		card
@@ -44,8 +43,9 @@ function init() {
 				el = $(e.target).find('a')
 					.slideUp();
 			});
-		card.appendTo(column);
-		column.appendTo(row);
+		card.appendTo(CONTENT_PANE);
+		// card.appendTo(column);
+		// column.appendTo(row);
 	}
 	suggest();
 }
