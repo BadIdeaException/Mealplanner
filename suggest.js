@@ -23,18 +23,18 @@ function init() {
 
 		let actionPane = $('<div class="actions"></div>');
 		card.append(actionPane);
+		
+		// Make search actions for Pinterest, Damn Delicious and Half Baked Harvest
 		[ 
 			{ name: 'Pinterest', icon: 'https://www.pinterest.com/favicon.ico', baseURL: 'https://www.pinterest.com/search/my_pins/?q=', suffix: ' recipes' },
 			{ name: 'Damn Delicious', icon: 'https://s23209.pcdn.co/wp-content/themes/damndelicious2021/favicon/favicon-32x32.png', baseURL: 'https://damndelicious.net/?s=', suffix: '' },
 			{ name: 'Half Baked Harvest', icon: 'https://www.halfbakedharvest.com/wp-content/uploads/2021/10/cropped-favicon-32x32.png', baseURL: 'https://www.halfbakedharvest.com/?s=', suffix: '' }
 		].forEach(action => {
 			let link = $('<a href="#">Search on <img src="' + action.icon + '"/> ' + action.name + '</a>');
-			link.bind('click', function search(e) {			
-				console.log($(e.target).closest('.card'));
+			link.bind('click', e => {			
 				window.open(
 					action.baseURL + 
-					encodeURIComponent($(e.target).closest('.card').attr('data-caption') + 
-					action.suffix)
+					encodeURIComponent($(e.target).closest('.card').attr('data-caption') + action.suffix)
 				);
 			});
 			actionPane.append(link);
