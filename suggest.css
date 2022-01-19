@@ -43,9 +43,11 @@ body {
 	   of sight rather than disappear offset to the bottom
 	 */
 	overflow: hidden;
+	margin-top: 1em;
 }
 
 .actions a {
+	display: block;
 	/* Move the element relative to its normal position.
 	   This will allow us to move it out of sight to the
 	   bottom (by setting its top to 100% the height of its
@@ -56,6 +58,13 @@ body {
 	top: 100%;
 	/* Animate moves */
 	transition: top 0.5s;
+	font-size: 90%;
+	/* Specify a line height so we can make sure the embedded
+	   icon will be the same size, since the lh unit is not
+	   supported yet. (as of Jan 19 2022)
+	 */
+	line-height: 1em;
+	padding: 0.1em;
 }
 
 .card:hover .actions a {
@@ -63,6 +72,10 @@ body {
 	   their card
 	 */
 	top: 0;
+}
+
+.actions a img {
+	height: 1em; /* Same as line height of ".actions a" above */
 }
 
 header {
