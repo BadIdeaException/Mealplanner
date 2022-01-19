@@ -17,14 +17,16 @@ const CATEGORIES = [
 function init() {
 	const CONTENT_PANE = $('#content-pane');
 
-	for (category of CATEGORIES) {
+	for (let i = 0; i < CATEGORIES.length; i++) {
+		let category = CATEGORIES[i];
+
 		// Build the category card
-		let card = $('<div class="card" data-caption="' + category + '">' + category + '</div>');
+		let card = $('<div id="card-' + i + '" class="card" data-caption="' + category + '">' + category + '</div>');
 
 		let actionPane = $('<div class="actions"></div>');
 		card.append(actionPane);
 		
-		// Make search actions for Pinterest, Damn Delicious and Half Baked Harvest
+		// Make search actions for Pinterest, Damn Delicious and Half Baked Harvest:
 		[ 
 			{ name: 'Pinterest', icon: 'https://www.pinterest.com/favicon.ico', baseURL: 'https://www.pinterest.com/search/my_pins/?q=', suffix: ' recipes' },
 			{ name: 'Damn Delicious', icon: 'https://s23209.pcdn.co/wp-content/themes/damndelicious2021/favicon/favicon-32x32.png', baseURL: 'https://damndelicious.net/?s=', suffix: '' },
